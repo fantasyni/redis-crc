@@ -1,0 +1,19 @@
+{
+  "name": "redis-crc",
+  "version": "0.1.0",
+  "description": "redis crc bindings",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bindings": "1.2.x",
+    "nan": "1.1.x"
+  },
+  "keywords": [
+    "redis",
+    "crc"
+  ],
+  "author": "fantasyni",
+  "license": "MIT"
+}

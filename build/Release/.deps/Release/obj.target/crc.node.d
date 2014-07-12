@@ -1,0 +1,1 @@
+cmd_Release/obj.target/crc.node := flock ./Release/linker.lock g++ -shared -pthread -rdynamic -m32  -Wl,-soname=crc.node -o Release/obj.target/crc.node -Wl,--start-group Release/obj.target/crc/src/crc.o -Wl,--end-group 
