@@ -53,18 +53,18 @@ unsigned int keyHashSlot(char *key, int keylen, int mod) {
         if (key[s] == '{') break;
 
     /* No '{' ? Hash the whole key. This is the base case. */
-    if (s == keylen) return crc16(key,keylen) % mod;
+    if (s == keylen) return crc16(key,keylen) & (mod-1);
 
     /* '{' found? Check if we have the corresponding '}'. */
     for (e = s+1; e < keylen; e++)
         if (key[e] == '}') break;
 
     /* No '}' or nothing betweeen {} ? Hash the whole key. */
-    if (e == keylen || e == s+1) return crc16(key,keylen) % mod;
+    if (e == keylen || e == s+1) return crc16(key,keylen) & (mod-1);
 
     /* If we are here there is both a { and a } on its right. Hash
      * what is in the middle between { and }. */
-    return crc16(key+s+1,e-s-1) % mod;
+    return crc16(key+s+1,e-s-1) & (mod-1);
 }
 
 NAN_METHOD(Crc) {
@@ -85,7 +85,6 @@ NAN_METHOD(Crc) {
   char* str = (char *) malloc(string.length() + 1);
   strcpy(str, *string);
 
-  printf("%s\n", str);
   uint16_t  value = crc16(str, (int) args[1]->NumberValue());
 
   NanReturnValue(NanNew<Number>(value));
